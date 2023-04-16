@@ -1,11 +1,12 @@
 package data;
 
+import model.UserData;
 import model.UserRegister;
 import org.testng.annotations.DataProvider;
+import utilities.Logs;
 
 public class DataGiver {
     public static final String invalidInfoDPName = "DataGiver";
-
 
     @DataProvider(name = invalidInfoDPName)
     public Object[][] invalidInfoDP() {
@@ -26,5 +27,10 @@ public class DataGiver {
                 {firstName, lastname, email, telephone, "", password, map.get("errorPassword")},
                 {firstName, lastname, email, telephone, password, "", map.get("errorConfirmPassword")}
         };
+    }
+
+    public UserData getValidCredentials() {
+        Logs.debug("getting valid Credentials");
+        return MapParser.getCredentials().get("valid");
     }
 }

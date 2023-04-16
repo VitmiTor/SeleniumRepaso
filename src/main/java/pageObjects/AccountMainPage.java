@@ -9,6 +9,9 @@ import webElements.single.$;
 public class AccountMainPage extends BasePage {
 
     private final $ continueButton = $(By.xpath("//a[text()='Continue']"));
+    private final $ emailUser = $(By.id("input-email"));
+    private final $ passwordUser = $(By.id("input-password"));
+    private final $ buttonLogin = $(By.cssSelector("input[type='submit']"));
 
     public AccountMainPage(WebDriver driver) {
         super(driver);
@@ -28,5 +31,14 @@ public class AccountMainPage extends BasePage {
     public void continueClick() {
         Logs.info("Clicking on continue");
         continueButton.click();
+    }
+
+    public void registerAccount(String user, String password) {
+        Logs.debug("Writing user email");
+        emailUser.sendKeys(user);
+        Logs.debug("Writing password");
+        passwordUser.sendKeys(password);
+        Logs.debug("clicking Login Button");
+        buttonLogin.click();
     }
 }

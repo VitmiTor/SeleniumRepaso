@@ -1,5 +1,7 @@
 package base;
 
+import data.DataGiver;
+import listeners.InvokeMethodListeners;
 import listeners.SuiteListeners;
 import listeners.TestListeners;
 import org.openqa.selenium.WebDriver;
@@ -13,17 +15,19 @@ import utilities.DriverManager;
 import utilities.Logs;
 
 
-@Listeners({SuiteListeners.class, TestListeners.class})
+@Listeners({SuiteListeners.class, TestListeners.class, InvokeMethodListeners.class})
 public abstract class BaseTest extends DriverManager {
     private final DriverManager driverManager = new DriverManager();
     protected SoftAssert softAssert;
-    protected final String smoke = "smoke";
+
     protected WebDriver driver;
-    protected final String regression = "regression";
+    protected final String regression = "Regression";
+    protected final String smoke = "Smoke";
 
     protected final String browsername = "Chrome";
     //protected final DataProviders dataProvider = new DataProviders();
     protected CommonFlows commonFlows;
+    protected DataGiver dataGiver;
 
     @BeforeMethod(alwaysRun = true, description = "Master precondition")
     public void setUpBase() {
@@ -32,6 +36,7 @@ public abstract class BaseTest extends DriverManager {
         initPages(driver);
         driver.get("https://ecommerce-playground.lambdatest.io/");
         commonFlows = new CommonFlows(driver);
+        dataGiver = new DataGiver();
     }
 
     protected void setDriver(ITestResult result) {

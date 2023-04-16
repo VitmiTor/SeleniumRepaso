@@ -11,7 +11,7 @@ public class TopBarPage extends BasePage {
 
     private final $ account = $(By.xpath
             ("//ul[@class='navbar-nav horizontal']//span[contains(text(),'My account')]"));
-
+    private final $ searchButton = $(By.xpath("//div[@id='main-header']//button[@type='submit']"));
 
     public TopBarPage(WebDriver driver) {
         super(driver);
@@ -22,7 +22,7 @@ public class TopBarPage extends BasePage {
     public void waitPageToLoad() {
         waitPage(account, this.getClass().getSimpleName());
     }
-    
+
     @Override
     public void verifyPage() {
         softAssert.assertTrue(account.isDisplayed());
@@ -32,5 +32,10 @@ public class TopBarPage extends BasePage {
     public void clickOnAccount() {
         Logs.info("Clicking on Account Bar");
         account.click();
+    }
+
+    public void clickOnSearch() {
+        Logs.info("Clicking on Search Button TopBar");
+        searchButton.click();
     }
 }
